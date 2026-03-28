@@ -23,7 +23,7 @@ All documents are:
 Install the Skill into WorkBuddy:
 
 ```bash
-git clone https://github.com/xopen-ai/xopen-mdoc-factory \
+git clone https://github.com/XOpenWorld/XOpen-Mdoc-Factory \
   ~/.workbuddy/skills/xopen-mdoc-factory
 ```
 
@@ -175,7 +175,7 @@ graph TD
 ### Option 1: Git Clone (Recommended)
 
 ```bash
-git clone https://github.com/xopen-ai/xopen-mdoc-factory \
+git clone https://github.com/XOpenWorld/XOpen-Mdoc-Factory \
   ~/.workbuddy/skills/xopen-mdoc-factory
 ```
 
@@ -223,7 +223,7 @@ The `security-design.md` template includes a Compliance section. Uncomment the r
 
 | Product | Description | Status |
 |---------|-------------|--------|
-| [XOpen Mdoc](https://github.com/xopen-ai/mdoc) | AI-native Markdown editor | 🚧 MVP |
+| [XOpen Mdoc](https://github.com/XOpenWorld/XOpen-Mdoc) | AI-native Markdown editor | 🚧 MVP |
 | **XOpen Mdoc Factory** | Project documentation generator | ✅ Available |
 | XOpen Flow | Visual workflow orchestration | 📋 Planned |
 | XOpen Agent | AI Agent manager | 📋 Planned |
@@ -249,5 +249,5 @@ MIT License — free for personal and commercial use.
 ---
 
 <p align="center">
-  Built with ❤️ by <a href="https://github.com/xopen-ai">XOpen</a>
+  Built with ❤️ by <a href="https://github.com/XOpenWorld">XOpen</a>
 </p>
