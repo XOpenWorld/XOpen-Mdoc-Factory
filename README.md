@@ -249,5 +249,5 @@ MIT License — free for personal and commercial use.
 ---
 
 <p align="center">
-  Built with ❤️ by <a href="https://github.com/XOpenWorld">XOpen</a>
+  Built with ❤️ by <a href="https://xopen.world">XOpen</a>
 </p>
