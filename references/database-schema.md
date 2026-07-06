@@ -1,14 +1,21 @@
-# 数据库设计文档模板
-<!-- FILL: 产品名称 -->
-**产品**: <!-- FILL: Product Name -->
-**数据库**: PostgreSQL <!-- FILL: 版本 -->（推荐 via Supabase）
-**文档版本**: 0.1.0
-**最后更新**: <!-- FILL: YYYY-MM-DD -->
-**状态**: Draft / Review / Final
+# 🗄️ 数据库设计文档 (Database Schema)
+
+> **📌 模板说明**: 本文档定义数据库表结构、索引、RLS 策略和迁移规范。AI 填写时请替换 `<!-- FILL -->` 部分。
 
 ---
 
-## 1. ER 图
+## 🗂️ 元数据
+
+| 字段 | 内容 |
+|------|------|
+| 📦 产品 | <!-- FILL: Product Name --> |
+| 🔧 数据库 | PostgreSQL <!-- FILL: 版本 -->（推荐 via Supabase）|
+| 📅 最后更新 | <!-- FILL: YYYY-MM-DD --> |
+| 🚦 状态 | <!-- FILL: Draft / Review / Final --> |
+
+---
+
+## 🔗 1. ER 图
 
 ```mermaid
 erDiagram
@@ -80,9 +87,9 @@ erDiagram
 
 ---
 
-## 2. 表结构定义
+## 📋 2. 表结构定义
 
-### 2.1 users — 用户表
+### 2.1 👤 users — 用户表
 
 | 字段名 | 类型 | 约束 | 默认值 | 描述 |
 |--------|------|------|--------|------|
@@ -115,7 +122,7 @@ CREATE TABLE users (
 
 ---
 
-### 2.2 folders — 文件夹表
+### 2.2 📁 folders — 文件夹表
 
 | 字段名 | 类型 | 约束 | 默认值 | 描述 |
 |--------|------|------|--------|------|
@@ -142,7 +149,7 @@ CREATE TABLE folders (
 
 ---
 
-### 2.3 documents — 文档表
+### 2.3 📄 documents — 文档表
 
 | 字段名 | 类型 | 约束 | 默认值 | 描述 |
 |--------|------|------|--------|------|
@@ -177,7 +184,7 @@ CREATE TABLE documents (
 
 ---
 
-### 2.4 tags — 标签表
+### 2.4 🏷️ tags — 标签表
 
 | 字段名 | 类型 | 约束 | 默认值 | 描述 |
 |--------|------|------|--------|------|
@@ -200,7 +207,7 @@ CREATE TABLE tags (
 
 ---
 
-### 2.5 document_tags — 文档标签关联表
+### 2.5 🔗 document_tags — 文档标签关联表
 
 ```sql
 CREATE TABLE document_tags (
@@ -212,7 +219,7 @@ CREATE TABLE document_tags (
 
 ---
 
-### 2.6 shares — 分享链接表
+### 2.6 🔗 shares — 分享链接表
 
 | 字段名 | 类型 | 约束 | 默认值 | 描述 |
 |--------|------|------|--------|------|
@@ -242,7 +249,7 @@ CREATE TABLE shares (
 
 ---
 
-### 2.7 activity_log — 操作日志表
+### 2.7 📊 activity_log — 操作日志表
 
 <!-- OPTIONAL: 如需审计功能 -->
 
@@ -268,7 +275,7 @@ CREATE TABLE activity_log (
 
 ---
 
-## 3. 索引策略
+## ⚡ 3. 索引策略
 
 ```sql
 -- documents 表：用户文档列表（最常用查询）
@@ -303,7 +310,7 @@ CREATE INDEX idx_activity_log_user_id ON activity_log(user_id, created_at DESC);
 
 ---
 
-## 4. Row Level Security（RLS）策略
+## 🔐 4. Row Level Security（RLS）策略
 
 > 适用于 Supabase / PostgreSQL 多租户场景
 
@@ -340,7 +347,7 @@ CREATE POLICY "shares_owner" ON shares
 
 ---
 
-## 5. 数据迁移版本管理
+## 📦 5. 数据迁移版本管理
 
 使用 `supabase/migrations/` 目录管理 SQL 迁移文件：
 
@@ -360,7 +367,7 @@ supabase/
 
 ---
 
-## 6. 备份与恢复
+## 💾 6. 备份与恢复
 
 | 策略 | 频率 | 保留时长 | 工具 |
 |------|------|---------|------|
@@ -377,7 +384,7 @@ supabase/
 
 ---
 
-## 7. 向量搜索（语义搜索）
+## 🧠 7. 向量搜索（语义搜索）
 
 <!-- OPTIONAL: 如果产品需要 AI 语义搜索 -->
 
@@ -399,8 +406,8 @@ CREATE INDEX idx_documents_embedding ON documents
 
 ---
 
-## 8. Changelog
+## 📋 8. Changelog
 
-| 版本 | 日期 | 变更 |
-|------|------|------|
+| 🔖 版本 | 📅 日期 | 📝 变更 |
+|---------|--------|---------|
 | 0.1.0 | <!-- FILL: YYYY-MM-DD --> | 初始版本 |

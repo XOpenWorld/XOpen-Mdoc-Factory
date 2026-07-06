@@ -1,12 +1,19 @@
-# 测试策略文档模板
-<!-- FILL: 产品名称 -->
-**产品**: <!-- FILL: Product Name -->
-**文档版本**: 0.1.0
-**最后更新**: <!-- FILL: YYYY-MM-DD -->
+# 🧪 测试策略文档 (Testing Strategy)
+
+> **📌 模板说明**: 本文档定义测试金字塔、工具选型、覆盖率和各层测试规范。AI 填写时请替换所有 `<!-- FILL -->` 占位符。
 
 ---
 
-## 1. 测试金字塔
+## 🗂️ 元数据
+
+| 字段 | 内容 |
+|------|------|
+| 📦 产品 | <!-- FILL: Product Name --> |
+| 📅 最后更新 | <!-- FILL: YYYY-MM-DD --> |
+
+---
+
+## 📊 1. 测试金字塔
 
 ```
            ┌─────┐
@@ -18,18 +25,18 @@
          └─────────┘
 ```
 
-| 层级 | 比例 | 目标数量 | 工具 |
-|------|------|---------|------|
+| 层级 | ⚖️ 比例 | 🎯 目标数量 | 🛠️ 工具 |
+|------|---------|-----------|---------|
 | 单元测试 | 70% | > 100 个 | Vitest + Testing Library |
 | 集成测试 | 20% | > 30 个 | Vitest + MSW（Mock Service Worker） |
 | E2E 测试 | 10% | > 15 个 | Playwright |
 
 ---
 
-## 2. 工具选型
+## 🔧 2. 工具选型
 
-| 工具 | 用途 | 版本 |
-|------|------|------|
+| 🛠️ 工具 | 📝 用途 | 🔖 版本 |
+|---------|---------|--------|
 | Vitest | 单元测试 + 集成测试 | ^2.0 |
 | @testing-library/react | React 组件测试 | ^16.0 |
 | @testing-library/user-event | 用户交互模拟 | ^14.0 |
@@ -39,21 +46,21 @@
 
 ---
 
-## 3. 覆盖率目标
+## 🎯 3. 覆盖率目标
 
-| 模块 | 行覆盖率 | 分支覆盖率 |
-|------|---------|----------|
+| 📁 模块 | 📏 行覆盖率 | 🌿 分支覆盖率 |
+|--------|-----------|-------------|
 | src/stores/ | ≥ 90% | ≥ 85% |
 | src/services/ | ≥ 80% | ≥ 75% |
 | src/lib/utils | ≥ 95% | ≥ 90% |
 | src/components/ | ≥ 70% | ≥ 65% |
-| 整体 | ≥ 75% | ≥ 70% |
+| 📊 整体 | ≥ 75% | ≥ 70% |
 
 ---
 
-## 4. 单元测试规范
+## 📝 4. 单元测试规范
 
-### 4.1 命名约定
+### 4.1 📂 命名约定
 
 ```
 src/
@@ -69,7 +76,7 @@ src/
       Button.test.tsx
 ```
 
-### 4.2 AAA 模式（Arrange-Act-Assert）
+### 4.2 🔄 AAA 模式（Arrange-Act-Assert）
 
 ```typescript
 describe('countWords', () => {
@@ -86,7 +93,7 @@ describe('countWords', () => {
 });
 ```
 
-### 4.3 Mock 策略
+### 4.3 🎭 Mock 策略
 
 ```typescript
 // 外部 API → 用 vi.mock 或 MSW 拦截
@@ -102,7 +109,7 @@ vi.setSystemTime(new Date('2026-01-01'));
 // localStorage → jsdom 自动支持，测试后 vi.clearAllMocks() 清理
 ```
 
-### 4.4 Store 测试模板
+### 4.4 📦 Store 测试模板
 
 ```typescript
 import { beforeEach, describe, expect, it } from 'vitest';
@@ -127,7 +134,7 @@ describe('documentStore', () => {
 
 ---
 
-## 5. 组件测试规范
+## ⚛️ 5. 组件测试规范
 
 ```typescript
 import { render, screen, fireEvent } from '@testing-library/react';
@@ -157,10 +164,10 @@ describe('Button', () => {
 
 ---
 
-## 6. E2E 测试场景
+## 🌐 6. E2E 测试场景
 
-| 场景 | 步骤 | 预期结果 |
-|------|------|---------|
+| 🎬 场景 | 📋 步骤 | ✅ 预期结果 |
+|---------|--------|-----------|
 | 注册新用户 | 填写邮箱/密码 → 提交 | 跳转到主界面 |
 | 创建文档 | 点击新建 → 输入内容 → Ctrl+S | 文档出现在侧边栏 |
 | 编辑并预览 | 输入 Markdown → 切换预览模式 | 预览正确渲染 |
@@ -172,7 +179,7 @@ describe('Button', () => {
 | 标签管理 | 添加标签 → 按标签筛选 | 文档列表按标签过滤 |
 | 登出 | 点击登出 | 跳转到登录页 |
 
-### E2E 配置
+### ⚙️ E2E 配置
 
 ```typescript
 // playwright.config.ts
@@ -202,10 +209,10 @@ export default defineConfig({
 
 ---
 
-## 7. 性能测试
+## ⚡ 7. 性能测试
 
-| 场景 | 工具 | 阈值 |
-|------|------|------|
+| 🎬 场景 | 🛠️ 工具 | 🎯 阈值 |
+|---------|--------|--------|
 | 10000 字文档加载渲染 | Playwright + performance API | < 500ms |
 | 实时预览延迟 | Vitest benchmark | < 100ms |
 | Store 写入性能 | Vitest benchmark | < 10ms |
@@ -224,7 +231,7 @@ describe('markdown render performance', () => {
 
 ---
 
-## 8. CI 集成
+## 🔄 8. CI 集成
 
 ```yaml
 # .github/workflows/ci.yml（测试部分）
@@ -243,7 +250,7 @@ describe('markdown render performance', () => {
 
 ---
 
-## 9. 测试报告
+## 📊 9. 测试报告
 
 - 单元测试覆盖率报告：上传至 Codecov，PR 中显示覆盖率变化
 - E2E 报告：Playwright HTML Report，失败时上传截图/视频到 CI Artifacts
@@ -251,8 +258,12 @@ describe('markdown render performance', () => {
 
 ---
 
-## 10. Changelog
+## 📋 10. Changelog
 
-| 版本 | 日期 | 变更 |
-|------|------|------|
+| 🔖 版本 | 📅 日期 | 📝 变更 |
+|---------|--------|---------|
 | 0.1.0 | <!-- FILL: YYYY-MM-DD --> | 初始版本 |
+
+---
+
+> **✅ 质量检查**: ✓ 测试金字塔比例合理 ✓ 覆盖率目标明确 ✓ 各层测试有规范模板 ✓ CI 集成完整

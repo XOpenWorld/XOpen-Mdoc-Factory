@@ -1,13 +1,20 @@
-# 组件库规范模板
-<!-- FILL: 产品名称 -->
-**产品**: <!-- FILL: Product Name -->
-**文档版本**: 0.1.0
-**最后更新**: <!-- FILL: YYYY-MM-DD -->
-**技术栈**: React + TypeScript + Tailwind CSS
+# 🧩 组件库规范 (Component Library)
+
+> **📌 模板说明**: 本文档定义所有 UI 组件的 API、状态、变体和主题系统。AI 填写时请替换 `<!-- FILL -->` 部分。
 
 ---
 
-## 1. 组件分级（Atomic Design）
+## 🗂️ 元数据
+
+| 字段 | 内容 |
+|------|------|
+| 📦 产品 | <!-- FILL: Product Name --> |
+| 📅 最后更新 | <!-- FILL: YYYY-MM-DD --> |
+| ⚛️ 技术栈 | React + TypeScript + Tailwind CSS |
+
+---
+
+## 🧬 1. 组件分级（Atomic Design）
 
 ```
 原子（Atom）        → Button, Input, Label, Icon, Badge, Avatar, Spinner
@@ -18,40 +25,40 @@
 
 ---
 
-## 2. 通用组件 API 模板
+## 📐 2. 通用组件 API 模板
 
 > 为每个组件填写以下模板
 
-### 组件名: <!-- FILL: ComponentName -->
+### 🧩 组件名: <!-- FILL: ComponentName -->
 
-**描述**: <!-- FILL: 一句话描述组件用途 -->
+**📝 描述**: <!-- FILL: 一句话描述组件用途 -->
 
-**文件位置**: `src/components/<!-- FILL: category/ComponentName.tsx -->`
+**📂 文件位置**: `src/components/<!-- FILL: category/ComponentName.tsx -->`
 
 #### Props
 
-| Prop | 类型 | 必填 | 默认值 | 描述 |
-|------|------|------|--------|------|
+| 📝 Prop | 📏 类型 | ⚠️ 必填 | 🔧 默认值 | 📖 描述 |
+|---------|--------|--------|----------|--------|
 | <!-- FILL: propName --> | <!-- FILL: type --> | <!-- FILL: yes/no --> | <!-- FILL: default --> | <!-- FILL: desc --> |
 
 #### Events（回调 Props）
 
-| Prop | 类型 | 描述 |
-|------|------|------|
+| 📝 Prop | 📏 类型 | 📖 描述 |
+|---------|--------|--------|
 | onClick | `(e: MouseEvent) => void` | 点击回调 |
 | <!-- FILL --> | <!-- FILL --> | <!-- FILL --> |
 
 #### 变体（Variants）
 
-| Variant | 描述 |
-|---------|------|
+| 🎨 Variant | 📖 描述 |
+|-----------|--------|
 | default | 默认样式 |
 | <!-- FILL --> | <!-- FILL --> |
 
 #### 状态（States）
 
-| 状态 | 触发条件 | 视觉表现 |
-|------|---------|---------|
+| 📊 状态 | 🎯 触发条件 | 🎨 视觉表现 |
+|--------|-----------|-----------|
 | default | 初始 | 正常样式 |
 | hover | 鼠标悬停 | 背景色加深 |
 | active / pressed | 鼠标按下 | scale(0.97) |
@@ -59,13 +66,13 @@
 | disabled | `disabled` prop 为 true | 50% 透明度，pointer-events: none |
 | loading | `loading` prop 为 true | 显示 Spinner |
 
-#### 可访问性
+#### ♿ 可访问性
 
 - ARIA 角色：`<!-- FILL: role="button" -->`
 - 键盘支持：<!-- FILL: Enter/Space 触发 onClick -->
 - 颜色对比度：AA 级（4.5:1 以上）
 
-#### 代码示例
+#### 💻 代码示例
 
 ```tsx
 import { <!-- FILL: ComponentName --> } from '@/components/<!-- FILL: category/ComponentName -->';
@@ -79,7 +86,7 @@ import { <!-- FILL: ComponentName --> } from '@/components/<!-- FILL: category/C
 <<!-- FILL: ComponentName --> disabled>不可用</<!-- FILL: ComponentName -->>
 ```
 
-#### 主题变量
+#### 🎨 主题变量
 
 ```css
 /* 在 globals.css 中自定义 */
@@ -89,12 +96,12 @@ import { <!-- FILL: ComponentName --> } from '@/components/<!-- FILL: category/C
 
 ---
 
-## 3. 已定义组件清单
+## 📦 3. 已定义组件清单
 
-### 3.1 Button（按钮）
+### 3.1 🔘 Button（按钮）
 
-| Prop | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
+| 📝 Prop | 📏 类型 | 🔧 默认值 | 📖 描述 |
+|---------|--------|----------|--------|
 | variant | `'primary' \| 'secondary' \| 'ghost' \| 'danger' \| 'link'` | `'primary'` | 样式变体 |
 | size | `'sm' \| 'md' \| 'lg'` | `'md'` | 尺寸 |
 | loading | boolean | false | 加载状态（显示 Spinner） |
@@ -111,10 +118,10 @@ import { <!-- FILL: ComponentName --> } from '@/components/<!-- FILL: category/C
 
 ---
 
-### 3.2 Input（输入框）
+### 3.2 📝 Input（输入框）
 
-| Prop | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
+| 📝 Prop | 📏 类型 | 🔧 默认值 | 📖 描述 |
+|---------|--------|----------|--------|
 | type | string | `'text'` | 输入类型 |
 | value | string | — | 受控值 |
 | placeholder | string | — | 占位文字 |
@@ -132,10 +139,10 @@ import { <!-- FILL: ComponentName --> } from '@/components/<!-- FILL: category/C
 
 ---
 
-### 3.3 Select（下拉选择）
+### 3.3 📋 Select（下拉选择）
 
-| Prop | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
+| 📝 Prop | 📏 类型 | 🔧 默认值 | 📖 描述 |
+|---------|--------|----------|--------|
 | options | `{value: string, label: string, disabled?: boolean}[]` | — | 选项列表 |
 | value | string | — | 当前选中值 |
 | placeholder | string | '请选择' | 占位文字 |
@@ -145,10 +152,10 @@ import { <!-- FILL: ComponentName --> } from '@/components/<!-- FILL: category/C
 
 ---
 
-### 3.4 Modal（弹窗）
+### 3.4 🪟 Modal（弹窗）
 
-| Prop | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
+| 📝 Prop | 📏 类型 | 🔧 默认值 | 📖 描述 |
+|---------|--------|----------|--------|
 | isOpen | boolean | — | 控制显示/隐藏 |
 | onClose | `() => void` | — | 关闭回调 |
 | title | string | — | 标题 |
@@ -166,10 +173,10 @@ import { <!-- FILL: ComponentName --> } from '@/components/<!-- FILL: category/C
 
 ---
 
-### 3.5 Toast（消息通知）
+### 3.5 🔔 Toast（消息通知）
 
-| Prop / 参数 | 类型 | 默认值 | 描述 |
-|------------|------|--------|------|
+| 📝 Prop / 参数 | 📏 类型 | 🔧 默认值 | 📖 描述 |
+|--------------|--------|----------|--------|
 | type | `'success' \| 'error' \| 'warning' \| 'info'` | `'info'` | 类型 |
 | message | string | — | 消息内容 |
 | duration | number | 3000 | 显示时长（ms），0=不自动关闭 |
@@ -184,10 +191,10 @@ toast('操作失败，请重试', 'error', { duration: 5000 });
 
 ---
 
-### 3.6 Dropdown（下拉菜单）
+### 3.6 📌 Dropdown（下拉菜单）
 
-| Prop | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
+| 📝 Prop | 📏 类型 | 🔧 默认值 | 📖 描述 |
+|---------|--------|----------|--------|
 | trigger | ReactNode | — | 触发元素 |
 | items | `DropdownItem[]` | — | 菜单项列表 |
 | placement | `'bottom' \| 'bottom-start' \| 'bottom-end' \| 'top' \| 'right' \| 'left'` | `'bottom-start'` | 弹出位置 |
@@ -207,10 +214,10 @@ type DropdownItem = {
 
 ---
 
-### 3.7 Tabs（标签页）
+### 3.7 📑 Tabs（标签页）
 
-| Prop | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
+| 📝 Prop | 📏 类型 | 🔧 默认值 | 📖 描述 |
+|---------|--------|----------|--------|
 | tabs | `{key: string, label: string, icon?: ReactNode, badge?: number}[]` | — | 标签列表 |
 | activeKey | string | — | 当前激活 key |
 | variant | `'line' \| 'pill' \| 'card'` | `'line'` | 样式变体 |
@@ -218,10 +225,10 @@ type DropdownItem = {
 
 ---
 
-### 3.8 Tooltip（工具提示）
+### 3.8 💬 Tooltip（工具提示）
 
-| Prop | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
+| 📝 Prop | 📏 类型 | 🔧 默认值 | 📖 描述 |
+|---------|--------|----------|--------|
 | content | string \| ReactNode | — | 提示内容 |
 | placement | string | `'top'` | 位置 |
 | delay | number | 600 | 延迟显示（ms） |
@@ -229,10 +236,10 @@ type DropdownItem = {
 
 ---
 
-### 3.9 Card（卡片）
+### 3.9 🃏 Card（卡片）
 
-| Prop | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
+| 📝 Prop | 📏 类型 | 🔧 默认值 | 📖 描述 |
+|---------|--------|----------|--------|
 | variant | `'default' \| 'bordered' \| 'elevated'` | `'default'` | 样式 |
 | padding | `'sm' \| 'md' \| 'lg' \| 'none'` | `'md'` | 内边距 |
 | interactive | boolean | false | 是否可点击（hover 效果） |
@@ -241,10 +248,10 @@ type DropdownItem = {
 
 ---
 
-### 3.10 Table（表格）
+### 3.10 📊 Table（表格）
 
-| Prop | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
+| 📝 Prop | 📏 类型 | 🔧 默认值 | 📖 描述 |
+|---------|--------|----------|--------|
 | columns | `Column[]` | — | 列定义 |
 | data | `Record<string, any>[]` | — | 数据源 |
 | loading | boolean | false | 加载状态 |
@@ -266,10 +273,10 @@ type Column = {
 
 ---
 
-### 3.11 Tag（标签）
+### 3.11 🏷️ Tag（标签）
 
-| Prop | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
+| 📝 Prop | 📏 类型 | 🔧 默认值 | 📖 描述 |
+|---------|--------|----------|--------|
 | color | string | `'#5B7FFF'` | 标签颜色（HEX） |
 | closable | boolean | false | 是否可关闭 |
 | onClose | `() => void` | — | 关闭回调 |
@@ -277,10 +284,10 @@ type Column = {
 
 ---
 
-### 3.12 Badge（徽标）
+### 3.12 🔴 Badge（徽标）
 
-| Prop | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
+| 📝 Prop | 📏 类型 | 🔧 默认值 | 📖 描述 |
+|---------|--------|----------|--------|
 | count | number | — | 数量（>99 显示 99+） |
 | dot | boolean | false | 圆点模式（不显示数字） |
 | color | string | `'error'` | 颜色 |
@@ -288,10 +295,10 @@ type Column = {
 
 ---
 
-### 3.13 Avatar（头像）
+### 3.13 👤 Avatar（头像）
 
-| Prop | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
+| 📝 Prop | 📏 类型 | 🔧 默认值 | 📖 描述 |
+|---------|--------|----------|--------|
 | src | string | — | 图片 URL |
 | name | string | — | 用户名（无图时显示首字母） |
 | size | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` | 尺寸 |
@@ -299,10 +306,10 @@ type Column = {
 
 ---
 
-### 3.14 Switch（开关）
+### 3.14 🔄 Switch（开关）
 
-| Prop | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
+| 📝 Prop | 📏 类型 | 🔧 默认值 | 📖 描述 |
+|---------|--------|----------|--------|
 | checked | boolean | — | 受控状态 |
 | disabled | boolean | false | 禁用 |
 | label | string | — | 标签文字 |
@@ -311,10 +318,10 @@ type Column = {
 
 ---
 
-### 3.15 Skeleton（骨架屏）
+### 3.15 💀 Skeleton（骨架屏）
 
-| Prop | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
+| 📝 Prop | 📏 类型 | 🔧 默认值 | 📖 描述 |
+|---------|--------|----------|--------|
 | variant | `'text' \| 'rect' \| 'circle'` | `'text'` | 形状 |
 | width | string \| number | `'100%'` | 宽度 |
 | height | string \| number | `'1em'` | 高度 |
@@ -323,7 +330,7 @@ type Column = {
 
 ---
 
-## 4. 主题系统
+## 🎨 4. 主题系统
 
 所有组件通过 CSS 变量适配主题，无需修改组件代码：
 
@@ -350,8 +357,12 @@ type Column = {
 
 ---
 
-## 5. Changelog
+## 📋 5. Changelog
 
-| 版本 | 日期 | 变更 |
-|------|------|------|
+| 🔖 版本 | 📅 日期 | 📝 变更 |
+|---------|--------|---------|
 | 0.1.0 | <!-- FILL: YYYY-MM-DD --> | 初始版本 |
+
+---
+
+> **✅ 质量检查**: ✓ 组件分级清晰 ✓ Props 类型完整 ✓ 状态/变体定义明确 ✓ 主题变量统一 ✓ 可访问性考虑

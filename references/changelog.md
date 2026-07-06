@@ -1,12 +1,20 @@
-# 更新日志模板
-<!-- FILL: 产品名称 -->
-**产品**: <!-- FILL: Product Name -->
-**格式**: [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)
-**版本规范**: [Semantic Versioning 2.0.0](https://semver.org/lang/zh-CN/)
+# 📋 更新日志 (Changelog)
+
+> **📌 模板说明**: 本文档记录每个版本的功能变更、Bug 修复和安全更新。遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/) 格式。
 
 ---
 
-## 版本号说明
+## 🗂️ 元数据
+
+| 字段 | 内容 |
+|------|------|
+| 📦 产品 | <!-- FILL: Product Name --> |
+| 📏 格式 | [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/) |
+| 🔖 版本规范 | [Semantic Versioning 2.0.0](https://semver.org/lang/zh-CN/) |
+
+---
+
+## 🔢 版本号说明
 
 ```
 MAJOR.MINOR.PATCH
@@ -20,44 +28,44 @@ PATCH：向后兼容的 Bug 修复
 
 ---
 
-## 变更类型说明
+## 🏷️ 变更类型说明
 
-| 类型 | 说明 |
-|------|------|
-| `Added` | 新功能 |
-| `Changed` | 已有功能的变更 |
-| `Deprecated` | 即将废弃的功能 |
-| `Removed` | 已移除的功能 |
-| `Fixed` | Bug 修复 |
-| `Security` | 安全漏洞修复 |
+| 类型 | 📝 说明 |
+|------|--------|
+| `Added` | ✨ 新功能 |
+| `Changed` | 🔄 已有功能的变更 |
+| `Deprecated` | ⚠️ 即将废弃的功能 |
+| `Removed` | ❌ 已移除的功能 |
+| `Fixed` | 🐛 Bug 修复 |
+| `Security` | 🔒 安全漏洞修复 |
 
 ---
 
-## [Unreleased]
+## 🚧 [Unreleased]
 
 > 已合并但尚未发布的变更
 
-### Added
+### ✨ Added
 - <!-- FILL: 新增功能描述 -->
 
-### Fixed
+### 🐛 Fixed
 - <!-- FILL: 修复问题描述 -->
 
 ---
 
-## [<!-- FILL: 版本号，如 1.0.0 -->] - <!-- FILL: YYYY-MM-DD -->
+## 🔖 [<!-- FILL: 版本号，如 1.0.0 -->] - <!-- FILL: YYYY-MM-DD -->
 
-### Added
+### ✨ Added
 - 🎉 <!-- FILL: 首个主要功能，例：Markdown 实时预览 -->
 - ✨ <!-- FILL: 次要功能 -->
 
-### Changed
+### 🔄 Changed
 - <!-- FILL: 变更描述（附 PR 链接或 Issue 编号） -->
 
-### Fixed
+### 🐛 Fixed
 - <!-- FILL: 修复描述 --> ([#123](https://github.com/<!-- FILL: yourorg/yourrepo -->/issues/123))
 
-### Security
+### 🔒 Security
 - <!-- FILL: 安全修复描述 -->
 
 ---
@@ -66,7 +74,7 @@ PATCH：向后兼容的 Bug 修复
 
 ## [0.1.0] - <!-- FILL: YYYY-MM-DD -->
 
-### Added
+### ✨ Added
 - 基础 Markdown 编辑器（CodeMirror 6）
 - 实时预览（remark + rehype）
 - 文档 CRUD（创建/读取/更新/删除）
@@ -77,7 +85,7 @@ PATCH：向后兼容的 Bug 修复
 
 ---
 
-## 自动化 Changelog 生成
+## ⚙️ 自动化 Changelog 生成
 
 使用 `standard-version` 或 `release-please` 自动生成：
 
@@ -116,7 +124,11 @@ npm run release:major  # → major 版本（0.1.0 → 1.0.0）
 
 ---
 
-## 版本历史链接
+## 🔗 版本历史链接
 
 [Unreleased]: https://github.com/<!-- FILL: yourorg/yourrepo -->/compare/v<!-- FILL: 最新版本 -->...HEAD
 [<!-- FILL: 版本号 -->]: https://github.com/<!-- FILL: yourorg/yourrepo -->/releases/tag/v<!-- FILL: 版本号 -->
+
+---
+
+> **✅ 质量检查**: ✓ 遵循 Keep a Changelog 格式 ✓ 版本号符合 SemVer ✓ 变更类型分类清晰 ✓ 关联 Issue/PR

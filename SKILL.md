@@ -18,6 +18,9 @@ Users can invoke this skill with the `/mdoc` command:
 ```
 /mdoc [product]               # Generate the full documentation set for a product
 /mdoc [product] [type...]     # Generate one or more specific documents
+/mdoc [product] edit [type]   # Modify an existing document
+/mdoc [product] add [type]    # Add a new document to existing set
+/mdoc [product] review        # Cross-check consistency across all documents
 ```
 
 **Product name** is flexible — use any short identifier:
@@ -25,6 +28,9 @@ Users can invoke this skill with the `/mdoc` command:
 /mdoc flow                    # XOpen Flow 完整文档集
 /mdoc mdoc prd                # XOpen Mdoc 的 PRD
 /mdoc agent tech api db       # XOpen Agent 的技术选型 + API + 数据库（多文档）
+/mdoc mdoc edit prd           # 修改 Mdoc 的 PRD
+/mdoc flow add competitive    # 给 Flow 补充竞品分析
+/mdoc agent review            # 审查 Agent 文档一致性
 /mdoc "my-saas-app"           # 任意产品名
 ```
 
@@ -55,18 +61,33 @@ Users can invoke this skill with the `/mdoc` command:
 - `/mdoc [product]` with no type → generate **full documentation set** (all Required docs)
 - `/mdoc [product] [type]` → generate **single document**, skip requirements gathering
 - `/mdoc [product] [type1] [type2] ...` → generate **multiple documents** in one batch
+- `/mdoc [product] edit [type]` → **modify** an existing document (locate → read → modify → write)
+- `/mdoc [product] add [type]` → **add** a new document to existing project docs
+- `/mdoc [product] review` → **cross-check** consistency across all generated docs
 - If product name matches a known XOpen product (mdoc, flow, agent, proxy, cloud), auto-load context from memory
 
 ## When to Use
 
 Trigger this skill when:
 
+### Generate (生成)
 - User types `/mdoc` command (highest priority — parse command and execute immediately)
 - User mentions "doc factory", "document factory", "文档工厂", "生成文档", "文档包", "mdoc factory"
 - User says "帮我写/生成/补全 [产品名] 的 [文档类型]"（e.g., "帮我写 Flow 的 API 文档"）
 - User says "给 [产品名] 生成 [文档类型]"（e.g., "给 XOpen Agent 生成 PRD"）
 - User says "基于 [产品名] 写 [文档类型]"（e.g., "基于 Mdoc 生成技术选型文档"）
 - User asks "help me write project docs" or "帮我写项目文档"
+
+### Edit / Iterate (修改/迭代)
+- User says "修改/更新/调整 [产品名] 的 [文档类型]"（e.g., "修改 Mdoc 的 PRD"）
+- User says "给 [产品名] 的 [文档类型] 加上/补充 [内容]"（e.g., "给架构文档加上微服务部分"）
+- User says "重新生成/重写 [产品名] 的 [文档类型]"（e.g., "PRD 写得太简单了，重写"）
+- User says "把 [产品名] 的 [A] 换成 [B]"（e.g., "把 Supabase 换成 Firebase"）
+- User says "优化/美化 [产品名] 的文档"（e.g., "排版太乱，优化一下"）
+
+### Review (审查)
+- User says "审查/检查 [产品名] 的文档一致性"
+- User says "文档之间有没有矛盾"
 
 ## Document Types (18 documents, 7 layers)
 
@@ -125,9 +146,20 @@ Trigger this skill when:
 
 ## Workflow
 
-### Step 1: Gather Requirements
+### Phase 0: Context Resolution (上下文解析)
 
-Ask the user for (or extract from context):
+**CRITICAL: Always check for existing project context before starting.**
+
+When a known XOpen product is mentioned (mdoc, flow, agent, proxy, cloud), automatically load context from:
+1. **Working memory** — Read `f:\MDWork\.workbuddy\memory\MEMORY.md` for project history
+2. **Existing docs** — Check if `{workspace}/{product}-docs/` or `{workspace}/docs/` already exists
+3. **Source code** — If the project has code, scan `package.json`, `src/` structure for context
+
+For custom products, ask the user for context or check the workspace for any existing documentation.
+
+### Step 1: Gather Requirements (需求收集)
+
+Ask the user for (or extract from context/memory):
 
 1. **Product name** — What is the product called?
 2. **Product type** — Web app / Mobile app / Desktop app / API / Library / SaaS / Other
@@ -140,16 +172,15 @@ Ask the user for (or extract from context):
 
 Present the extracted information back for user confirmation before proceeding.
 
-### Step 2: Generate Documents
+### Step 2: Generate Documents (文档生成)
 
 After user confirms the requirements outline:
 
-1. **Generate in parallel batches** — Documents within the same layer can be generated simultaneously
-2. **Use the template references** — Each document type has a template in `references/`. Read the relevant template before writing.
-3. **Cross-reference between documents** — Ensure consistency (e.g., tech stack mentioned in PRD matches the Tech Stack doc)
-4. **Write in the user's language** — Match the language the user used in their request (Chinese or English)
+1. **Read template references** — Each document type has a template in `references/`. Read the relevant template before writing.
+2. **Cross-reference between documents** — Ensure consistency (e.g., tech stack mentioned in PRD matches the Tech Stack doc)
+3. **Write in the user's language** — Match the language the user used in their request (Chinese or English)
 
-**Batch order**:
+**Generation batch order**:
 ```
 Batch 1 (Strategy + Product):  Product Vision, Roadmap, PRD, Competitive Analysis
 Batch 2 (Design):              Design System, UI Specification, Component Library
@@ -157,7 +188,73 @@ Batch 3 (Engineering):         Tech Stack, Architecture, API Spec, Database Sche
 Batch 4 (Operations+):         DevOps, Testing, i18n, Contributing, Changelog
 ```
 
-### Step 3: Review & Refine
+**⚡ MANDATORY: Progress Reporting (进度报告)**
+
+> You MUST report progress to the user after each batch. This is critical for user experience — the user needs to know what's happening.
+
+**Between each batch, output a progress block**:
+
+```markdown
+---
+
+### 📊 文档生成进度
+
+| 批次 | 📂 层级 | 📄 文档 | 🚦 状态 |
+|------|---------|---------|--------|
+| Batch 1 | 🎯 战略层 + 📦 产品层 | Product Vision, Roadmap, PRD, Competitive Analysis | ✅ 已完成 |
+| Batch 2 | 🎨 设计层 | Design System, UI Specification, Component Library | 🔄 生成中... |
+| Batch 3 | 🔧 技术层 | Tech Stack, Architecture, API Spec, Database Schema, Security | ⏳ 等待中 |
+| Batch 4 | 🚀 运维 + 🌐 社区 | DevOps, Testing, i18n, Contributing, Changelog | ⏳ 等待中 |
+
+> **当前进度**: 2/4 批次完成 (6/18 文档)
+```
+
+**At the very start, before Batch 1**, output:
+```markdown
+---
+
+### 🚀 开始生成文档
+
+**📦 产品**: {product name}
+**📋 文档范围**: {list of docs to generate}
+**📍 输出路径**: `{output-path}/`
+
+即将开始生成，共 4 个批次、{N} 个文档...
+
+---
+
+✅ **Batch 1/4 — 战略层 + 产品层** (4 个文档)
+🔄 正在生成 Product Vision...
+```
+
+**After ALL batches complete**, output a final summary:
+```markdown
+---
+
+### 🎉 文档生成完毕！
+
+**📦 产品**: {product name}
+**📍 位置**: `{output-path}/`
+**📄 文档总数**: {N} 个
+
+| 📂 层级 | 📄 文档数 | ✅ 状态 |
+|---------|----------|--------|
+| 🎯 战略层 | 2 | ✅ |
+| 📦 产品层 | 2 | ✅ |
+| 🎨 设计层 | 3 | ✅ |
+| 🔧 技术层 | 5 | ✅ |
+| 🚀 运维层 | 2 | ✅ |
+| 🌐 社区层 | 2 | ✅ |
+
+---
+
+💡 **后续操作**:
+- 输入 `/mdoc {product} edit {doc-type}` 修改某个文档
+- 输入 `/mdoc {product} add {doc-type}` 新增文档
+- 输入 `/mdoc {product} review` 交叉审查一致性
+```
+
+### Step 3: Review & Refine (审查与迭代)
 
 After all documents are generated:
 
@@ -165,7 +262,7 @@ After all documents are generated:
 2. **Ask user for feedback** — "文档已生成完毕，是否需要调整某个部分？"
 3. **Apply refinements** — Modify individual documents based on user feedback
 
-### Step 4: Package Output
+### Step 4: Package Output (打包输出)
 
 Generate the final folder structure:
 
@@ -207,6 +304,80 @@ Create the `00-README.md` index file that:
 - Includes a "how to use these documents" section
 
 **Output location**: Ask the user for preferred output path. Default: `{workspace}/docs/` or `{workspace}/{product-name}-docs/`
+
+### Step 5: Iterate & Modify (迭代修改)
+
+> **IMPORTANT: Document generation is NOT one-shot. Users can modify documents at any time.**
+
+After initial generation, support the following operations:
+
+#### 5.1 Single Document Edit
+
+When user says things like:
+- "修改 {product} 的 PRD"
+- "/mdoc {product} edit prd"
+- "给 {product} 的架构文档加上微服务部分"
+- "更新 {product} 技术选型，把 Supabase 换成 Firebase"
+
+**Process**:
+1. Locate the existing document file
+2. Read its current content
+3. Read the corresponding template from `references/` for structure reference
+4. Apply the requested changes (add/modify/delete sections)
+5. Write the updated content back
+6. Confirm: "✅ 已更新 `{filename}`，修改内容：{summary of changes}"
+
+#### 5.2 Multi-Document Update
+
+When user says things like:
+- "把所有文档的版本号从 0.1 更新到 0.2"
+- "所有文档中提到 X 的地方改成 Y"
+- "/mdoc {product} review"
+
+**Process**:
+1. Identify which documents are affected
+2. For each affected document, read → modify → write
+3. Report changes per document
+
+#### 5.3 Add New Document
+
+When user says things like:
+- "给 {product} 加一个竞品分析"
+- "/mdoc {product} add competitive"
+- "补充 {product} 的 onboarding 设计"
+
+**Process**:
+1. Read the corresponding template from `references/`
+2. Read other existing documents for cross-reference context
+3. Generate the new document with consistent context
+4. Place in the correct subfolder
+5. Update `00-README.md` index
+6. Confirm: "✅ 已新增 `{filename}`"
+
+#### 5.4 Regenerate Document
+
+When user says things like:
+- "重新生成 {product} 的技术架构文档"
+- "PRD 写得太简单了，重新写一份更详细的"
+
+**Process**:
+1. Confirm with user: "会覆盖现有文档，确认重新生成？"
+2. Read the template + all other documents for context
+3. Regenerate with more detail
+4. Write and confirm
+
+#### 5.5 Incremental Modification Patterns
+
+Common modification patterns and how to handle them:
+
+| User Request | Action |
+|-------------|--------|
+| "加上 XX 功能" | Read doc → Add section → Write |
+| "去掉 XX 部分" | Read doc → Remove section → Write |
+| "XX 改成 YY" | Read doc → Replace content → Write |
+| "重新写 XX 章节" | Read doc → Rewrite section → Write |
+| "排版/格式优化" | Read doc → Apply aesthetics → Write |
+| "补充更多细节" | Read doc → Expand sections → Write |
 
 ## Template References
 

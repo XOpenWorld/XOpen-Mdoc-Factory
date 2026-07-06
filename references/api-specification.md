@@ -1,23 +1,30 @@
-# API 接口文档模板
-<!-- FILL: 产品名称 -->
-**产品**: <!-- FILL: Product Name -->
-**API 版本**: v1.0
-**文档版本**: 0.1.0
-**最后更新**: <!-- FILL: YYYY-MM-DD -->
-**状态**: Draft / Review / Final
+# 📡 API 接口文档 (API Specification)
+
+> **📌 模板说明**: 本文档定义所有对外暴露的 API 接口规范。AI 填写时请替换 `<!-- FILL -->` 部分。
 
 ---
 
-## 1. 通用规范
+## 🗂️ 元数据
 
-### 1.1 Base URL
+| 字段 | 内容 |
+|------|------|
+| 📦 产品 | <!-- FILL: Product Name --> |
+| 🔖 API 版本 | v1.0 |
+| 📅 最后更新 | <!-- FILL: YYYY-MM-DD --> |
+| 🚦 状态 | <!-- FILL: Draft / Review / Final --> |
+
+---
+
+## 🌐 1. 通用规范
+
+### 1.1 🔗 Base URL
 
 ```
 开发环境: https://dev-api.<!-- FILL: yourdomain.com -->/v1
 生产环境: https://api.<!-- FILL: yourdomain.com -->/v1
 ```
 
-### 1.2 认证方式
+### 1.2 🔐 认证方式
 
 | 方式 | 适用场景 | Header / 参数 |
 |------|---------|--------------|
@@ -27,7 +34,9 @@
 
 JWT 有效期：Access Token `15min`，Refresh Token `30d`
 
-### 1.3 请求格式
+### 1.3 📝 请求格式
+
+
 
 ```
 Content-Type: application/json
@@ -35,7 +44,7 @@ Accept: application/json
 Accept-Language: zh-CN, en-US
 ```
 
-### 1.4 响应格式
+### 1.4 📦 响应格式
 
 **成功响应**:
 ```json
@@ -58,7 +67,7 @@ Accept-Language: zh-CN, en-US
 }
 ```
 
-### 1.5 错误码体系
+### 1.5 ❌ 错误码体系
 
 | HTTP 状态 | 业务错误码范围 | 含义 |
 |-----------|-------------|------|
@@ -84,7 +93,7 @@ Accept-Language: zh-CN, en-US
 | 42201 | 参数格式错误 |
 | 42901 | 请求过于频繁 |
 
-### 1.6 分页参数
+### 1.6 📄 分页参数
 
 ```
 GET /resources?page=1&pageSize=20&sort=created_at&order=desc
@@ -103,7 +112,7 @@ GET /resources?page=1&pageSize=20&sort=created_at&order=desc
 }
 ```
 
-### 1.7 版本管理策略
+### 1.7 📌 版本管理策略
 
 - URL 路径版本号：`/v1/`, `/v2/`
 - 重大变更时升级主版本
@@ -112,7 +121,7 @@ GET /resources?page=1&pageSize=20&sort=created_at&order=desc
 
 ---
 
-## 2. 认证 API
+## 🔑 2. 认证 API
 
 ### 2.1 注册
 
@@ -188,7 +197,7 @@ GET /auth/oauth/github?redirect=...
 
 ---
 
-## 3. 资源 API 模板
+## 📋 3. 资源 API 模板
 
 > **使用说明**：为每种核心资源复制以下模板，填写 `<!-- FILL -->` 部分。
 
@@ -299,7 +308,7 @@ Authorization: Bearer <token>
 
 ---
 
-## 4. 核心业务 API（示例：文档模块）
+## 📄 4. 核心业务 API（示例：文档模块）
 
 <!-- OPTIONAL: 根据产品实际业务填写，以下为示例 -->
 
@@ -354,7 +363,7 @@ POST /documents/:id/export
 
 ---
 
-## 5. AI API
+## 🤖 5. AI API
 
 <!-- OPTIONAL: 如果产品包含 AI 功能 -->
 
@@ -389,7 +398,7 @@ data: {"delta": "", "done": true, "usage": {"promptTokens": 100, "completionToke
 
 ---
 
-## 6. WebSocket 事件
+## 🔌 6. WebSocket 事件
 
 <!-- OPTIONAL: 如果产品包含实时协作功能 -->
 
@@ -418,7 +427,7 @@ data: {"delta": "", "done": true, "usage": {"promptTokens": 100, "completionToke
 
 ---
 
-## 7. 速率限制
+## ⏱️ 7. 速率限制
 
 | 端点分类 | 限制 | 窗口 |
 |---------|------|------|
@@ -437,7 +446,7 @@ Retry-After: 42
 
 ---
 
-## 8. SDK 示例
+## 💻 8. SDK 示例
 
 ### JavaScript/TypeScript
 
@@ -473,8 +482,8 @@ curl -X GET "https://api.yourdomain.com/v1/documents?page=1&pageSize=20" \
 
 ---
 
-## 9. Changelog
+## 📋 9. Changelog
 
-| 版本 | 日期 | 变更 |
-|------|------|------|
+| 🔖 版本 | 📅 日期 | 📝 变更 |
+|---------|--------|---------|
 | v1.0 | <!-- FILL: YYYY-MM-DD --> | 初始版本 |
